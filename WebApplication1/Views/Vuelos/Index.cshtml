@@ -1,0 +1,64 @@
+﻿@using Dominio
+
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+@if (TempData["Exito"] != null)
+{
+    <div class="alert alert-success">@TempData["Exito"]</div>
+}
+
+@{
+    ViewData["Title"] = "Listado de Vuelos";
+    var vuelos = ViewBag.Vuelos as List<Dominio.Vuelo>;
+}
+
+<h2>Listado de Vuelos</h2>
+<form method="get" asp-action="VuelosFiltrados" asp-controller="Vuelos" class="mb-4">
+    <div class="input-group">
+        <input type="text" name="filtro" class="form-control" placeholder="Buscar por código IATA" />
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </div>
+</form>
+
+@if (vuelos != null && vuelos.Count > 0)
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Número de Vuelo</th>
+                <th>Ruta</th>
+                <th>Avión</th>
+                <th>Frecuencia</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var vuelo in vuelos)
+            {
+                <tr>
+                    <td>@vuelo.NumeroVuelo</td>
+                    <td>@vuelo.Ruta.AeropuertoSalida.CodigoIATA - @vuelo.Ruta.AeropuertoLlegada.CodigoIATA</td>
+                    <td>@vuelo.Avion.Modelo @vuelo.Avion.Modelo</td>
+                    <td>
+                        @foreach (var dia in vuelo.Frecuencia)
+                        {
+                            @dia.ToString() <text> </text>
+                        }   
+                    </td>
+                    <td>
+
+                        <a class="btn btn-success" asp-controller="Vuelos" asp-action="Comprar" asp-route-numero="@vuelo.NumeroVuelo">Comprar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No hay vuelos disponibles.</p>
+}
+

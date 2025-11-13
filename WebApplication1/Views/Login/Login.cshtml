@@ -1,0 +1,15 @@
+﻿@using Dominio
+@if(ViewBag.error != null)
+{
+    <div class="alert-danger">@ViewBag.error</div>
+}
+
+<h1 class="text-center text-primary fw-bold shadow-sm p-3 mb-4 bg-light rounded">Bienvenido a mi proyecto</h1>
+
+<h2>Iniciar Sesion</h2>
+<form method="post">
+    <input type="text" placeholder="Ingrese correo" name="correo" /><br />
+    <input type="text" placeholder="Ingrese contraseña" name="contraseña" /><br />
+
+    <button type="submit">Ingresar</button>
+</form>

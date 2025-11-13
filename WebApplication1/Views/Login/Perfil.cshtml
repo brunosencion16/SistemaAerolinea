@@ -1,0 +1,32 @@
+﻿@using Dominio
+@{
+    ViewData["Title"] = "Perfil del Cliente";
+}
+
+<h2>Perfil del Cliente</h2>
+
+@if (ViewBag.Cliente != null)
+{
+    <p><strong>Nombre:</strong> @ViewBag.Cliente.Nombre</p>
+    <p><strong>Correo:</strong> @ViewBag.Cliente.Correo</p>
+    <p><strong>Documento:</strong> @ViewBag.Cliente.Documento</p>
+    <p><strong>Nacionalidad:</strong> @ViewBag.Cliente.Nacionalidad</p>
+
+    @if (ViewBag.Cliente is Premium)
+    {
+        Premium p = (Premium)ViewBag.Cliente;
+        <p><strong>Tipo:</strong> Premium</p>
+        <p><strong>Puntos:</strong> @p.Puntos</p>
+    }
+    else if (ViewBag.Cliente is Ocasional)
+    {
+        Ocasional o = (Ocasional)ViewBag.Cliente;
+        <p><strong>Tipo:</strong> Ocasional</p>
+        //uso un operador ternario ya que es mas practico que usar un if para que el cliente no vea "true" o "false"
+        <p><strong>Elegible para regalo de cabina:</strong> @(o.RegalosDeCabina ? "si" : "no")</p>
+    }
+}
+else
+{
+    <p>No se encontró información del cliente.</p>
+}

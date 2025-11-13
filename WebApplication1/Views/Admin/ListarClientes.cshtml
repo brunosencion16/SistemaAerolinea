@@ -1,0 +1,59 @@
+﻿@using Dominio
+
+<h2>Clientes</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Correo</th>
+            <th>Documento</th>
+            <th>Nombre</th>
+            <th>Tipo</th>
+            <th>Editar</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (ViewBag.Clientes != null)
+        {
+            foreach (Cliente c in ViewBag.Clientes)
+            {
+                <tr>
+                    <td>@c.Correo</td>
+                    <td>@c.Documento</td>
+                    <td>@c.Nombre</td>
+                    <td>
+                        @if (c is Premium)
+                        {
+                            <text>Premium</text>
+                        }
+                        else if (c is Ocasional)
+                        {
+                            <text>Ocasional</text>
+                        }
+                    </td>
+                    <td>
+                        <form method="post" asp-action="EditarCliente">
+                            <input type="hidden" name="correo" value="@c.Correo" />
+
+                            @if (c is Premium p)
+                            {
+                                <label>Puntos:</label>
+                                <input type="number" name="puntos" value="@p.Puntos" min="0" class="form-control" />
+                            }
+                            else if (c is Ocasional o)
+                            {
+                                <label>Regalo de cabina:</label>
+                                <select name="elegible" class="form-control">
+                                    <option value="true" selected="@(o.RegalosDeCabina)">Sí</option>
+                                    <option value="false" selected="@(o.RegalosDeCabina == false)">No</option>
+                                </select>
+                            }
+
+                            <button type="submit" class="btn btn-primary btn-sm mt-2">Guardar</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

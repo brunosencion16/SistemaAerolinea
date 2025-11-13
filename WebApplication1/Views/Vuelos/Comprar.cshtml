@@ -1,0 +1,27 @@
+﻿@using Dominio
+
+<h2>Comprar Pasaje - Vuelo @ViewBag.Vuelo.NumeroVuelo</h2>
+
+<p><strong>Ruta:</strong> @ViewBag.Vuelo.Ruta.AeropuertoSalida.CodigoIATA - @ViewBag.Vuelo.Ruta.AeropuertoLlegada.CodigoIATA</p>
+<p><strong>Avión:</strong> @ViewBag.Vuelo.Avion.Modelo</p>
+<p><strong>Frecuencia:</strong> @string.Join(", ", ViewBag.Vuelo.Frecuencia)</p>
+
+<form method="post" asp-action="Comprar">
+    <input type="hidden" name="numeroVuelo" value="@ViewBag.Vuelo.NumeroVuelo" />
+
+    <label>Fecha de vuelo:</label>
+    <input type="date" name="fecha" required /><br /><br />
+
+    <label>Equipaje:</label>
+    <select name="equipaje" required>
+        <option value="Cabina">Cabina</option>
+        <option value="Bodega">Bodega</option>
+        <option value="Light">Light</option>
+
+    </select><br /><br />
+
+    <label>Cantidad de pasajes:</label>
+    <input type="number" name="cantidad" min="1" max="10" value="1" required /><br /><br />
+
+    <button type="submit" class="btn btn-primary">Comprar</button>
+</form>

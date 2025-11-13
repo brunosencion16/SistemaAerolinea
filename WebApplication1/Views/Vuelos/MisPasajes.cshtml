@@ -1,0 +1,34 @@
+﻿@using Dominio
+
+<h2>Mis Pasajes</h2>
+
+@if (ViewBag.Pasajes != null && ((List<Pasaje>)ViewBag.Pasajes).Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Vuelo</th>
+                <th>Fecha</th>
+                <th>Equipaje</th>
+                <th>Precio</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Pasaje p in ViewBag.Pasajes)
+            {
+                <tr>
+                    <td>@p.Id</td>
+                    <td>@p.Vuelo.NumeroVuelo</td>
+                    <td>@p.Fecha</td>
+                    <td>@p.Equipaje</td>
+                    <td>@p.Precio</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-info">No tenés pasajes comprados.</div>
+}

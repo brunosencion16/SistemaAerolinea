@@ -1,0 +1,21 @@
+﻿    @using Dominio
+    @if (ViewBag.error != null)
+    {
+        <div class="alert-danger">@ViewBag.error</div>
+    }
+
+    <h2>Registrarse</h2>
+    <form id="formR" method="post">
+        <input type="text" placeholder="Ingrese correo" name="correo" /><br />
+        <input type="text" placeholder="Ingrese contraseña" name="contraseña" /><br />
+        <input type="text" placeholder="Ingrese documento" name="documento" /><br />
+        <input type="text" placeholder="Ingrese nombre" name="nombre" /><br />
+        <input type="text" placeholder="Ingrese nacionalidad" name="nacionalidad" /><br />
+
+        <button type="submit">Ingresar</button>
+    </form>
+
+@section Scripts {
+    <script src="~/js/Validar.js"></script>
+}
+    
